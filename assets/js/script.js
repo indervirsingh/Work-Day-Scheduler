@@ -23,12 +23,11 @@ var currentDayText = document.getElementById("currentDay");
         rowDiv.attr("id", rowNumber.toString());
         rowDiv.addClass(rowNumber.toString());
 
-        checkCalendarTimes(rowDiv, rowNumber);
         // Add that row to the container, so it shows up on the html
         containerDiv.append(rowDiv);
     };
 
-    var checkCalendarTimes = function (rowDiv, rowNumber) {
+    var checkCalendarTimes = function (textAreaDiv, rowNumber) {
 
         // Get the current hour
         var currentHour = moment().hour();
@@ -43,13 +42,13 @@ var currentDayText = document.getElementById("currentDay");
 
         // This will make the past hours gray/red/green depending on time
         if (currentHour > hourRow) {
-            rowDiv.addClass("past");
+            textAreaDiv.addClass("past");
         }
         else if (currentHour == hourRow) {
-            rowDiv.addClass("present");
+            textAreaDiv.addClass("present");
         }
         else {
-            rowDiv.addClass("future");
+            textAreaDiv.addClass("future");
         };
     };
 
@@ -86,6 +85,7 @@ var currentDayText = document.getElementById("currentDay");
         textArea.addClass("text");
         textArea.attr("id", "text" + rowNumber.toString());
 
+        checkCalendarTimes(textArea, rowNumber);
         // Add to the page
         row.append(textArea);
     }
@@ -175,8 +175,6 @@ for (let rows = 0; rows < maxRows; rows++) {
 };
 // Load saved data, AFTER loading the rows
 renderStoredData();
-
-// Save the user data
 
 // ----------------------------------------------------------------------------------
 
