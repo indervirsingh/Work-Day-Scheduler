@@ -13,9 +13,10 @@ let maxRows = hours.length;
 
 var generateRow = function (rowNumber) {
 
-    // Create div, add the classes "rows" and row number for later styling use
+    // Create div, add the classes "rows" and row number as an ID
     var rowDiv = $("<div>");
     rowDiv.addClass("rows");
+    rowDiv.attr("id", rowNumber.toString());
     rowDiv.addClass(rowNumber.toString());
 
     // Add that row to the container, so it shows up on the html
@@ -25,8 +26,8 @@ var generateRow = function (rowNumber) {
 var generateHourColumn = function (rowNumber) {
 
     // This div is where to append
-    var rowClassName = "." + rowNumber.toString();
-    var row = $(rowClassName);
+    var rowID = "." + rowNumber.toString();
+    var row = $(rowID);
 
     // Create div, add classes to it, then add the hour to the text
     var hourDiv = $("<div>");
@@ -47,8 +48,8 @@ var generateHourColumn = function (rowNumber) {
 var generateTextAreaColumn = function (rowNumber) {
 
     // This div is where to append
-    var rowClassName = "." + rowNumber.toString();
-    var row = $(rowClassName);
+    var rowID = "#" + rowNumber.toString();
+    var row = $(rowID);
 
     // Create div
     var textArea = $("<textarea>");
@@ -62,8 +63,8 @@ var generateTextAreaColumn = function (rowNumber) {
 var generateSaveButton = function (rowNumber) {
 
     // This div is where to append
-    var rowClassName = "." + rowNumber.toString();
-    var row = $(rowClassName);
+    var rowID = "#" + rowNumber.toString();
+    var row = $(rowID);
 
     // Create the button, add classes, and add text
     var saveButton = $("<button>");
@@ -78,27 +79,19 @@ var generateSaveButton = function (rowNumber) {
 
 // This loop will generate the rows (hours)
 for (let rows = 0; rows < maxRows; rows++) {
+
     let currentHour = rows;
+
+    // Create the row div
     generateRow(rows);
-    // This will generate the column (hour - textArea - saveButton)
-    for (let columns = 0; columns < 3; columns++) {
 
-        switch (columns) {
-            case 0:
-                // create the hour
-                generateHourColumn(currentHour);
-                break;
-            case 1:
-                // create text area
-                generateTextAreaColumn(rows);
-                break;
-            case 2:
-                // create save button
-                generateSaveButton(rows);
-                break;
-        };
+    // Each column will be appended to the corresponding row div
 
-    };
-
+    // Create hour column
+    generateHourColumn(currentHour);
+    // Create text area
+    generateTextAreaColumn(rows);
+    // Create save button
+    generateSaveButton(rows);
 
 };
