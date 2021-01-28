@@ -10,6 +10,8 @@ textarea {
     resize: none;
     color: #000000;
     border-left: 1px solid black;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
     padding: 10px;
     width: 100%;
 }
@@ -31,7 +33,7 @@ textarea {
     flex-direction: row;
     white-space: pre-wrap;
     height: 80px;
-    border-top: 1px solid black;
+    padding: 5px;
 }
 .hour {
     background-color: #ffffff;
