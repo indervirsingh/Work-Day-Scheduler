@@ -84,7 +84,7 @@ var currentDayText = document.getElementById("currentDay");
         // Create div
         var textArea = $("<textarea>");
         textArea.addClass("text");
-        textArea.addClass(rowNumber.toString());
+        textArea.attr("id", "text" + rowNumber.toString());
 
         // Add to the page
         row.append(textArea);
@@ -100,10 +100,25 @@ var currentDayText = document.getElementById("currentDay");
         var saveButton = $("<button>");
         saveButton.addClass("saveButton");
         saveButton.addClass(rowNumber.toString());
+        saveButton.attr("value", rowNumber.toString());
         saveButton.text("SAVE");
 
         // Add to the container div
         row.append(saveButton);
+
+
+
+
+        saveButton.on("click", function () {
+
+            // Save the data to local storage
+            var buttonClicked = $(this).val();
+            var textID = "text" + buttonClicked;
+            var data = document.getElementById(textID).value;
+            console.log(data);
+            localStorage.setItem(buttonClicked, data);
+
+        });
     };
 
     var generateCurrentDay = function () {
@@ -113,32 +128,55 @@ var currentDayText = document.getElementById("currentDay");
         currentDayText.innerHTML = currentDay;
     };
 
+    var renderStoredData = function () {
+        // Loop through all the rows and if there is data saved, then show it
+        for (let i = 0; i < maxRows; i++) {
+
+            // First check if the saved data even exists for that current row
+            if (localStorage.getItem(i) !== null) {
+
+                // Get the correlating textArea div
+                var textID = "text" + i;
+                var textArea = document.getElementById(textID);
+
+                // Get the actual text that was saved in that div
+                var textToDisplay = localStorage.getItem(i);
+
+                // Now display it in the proper row
+                textArea.value = textToDisplay;
+            };
+        }
+    }
+
+
 // ----------------------------------------------------------------------------------
 
 /* ALL OTHER CODE */
 
-    // Generate the day on the header
-    generateCurrentDay();
-    // This loop will generate the rows (hours)
-    for (let rows = 0; rows < maxRows; rows++) {
+// Generate the day on the header
+generateCurrentDay();
+// This loop will generate the rows (hours)
+for (let rows = 0; rows < maxRows; rows++) {
+    
+    let currentHour = rows;
+    
+    // Create the row div
+    generateRow(rows);
+    
+    // Each column will be appended to the corresponding row div
+    
+    // Create hour column
+    generateHourColumn(currentHour);
+    // Create text area
+    generateTextAreaColumn(rows);
+    // Create save button
+    generateSaveButton(rows);
+    
+};
+// Load saved data, AFTER loading the rows
+renderStoredData();
 
-        let currentHour = rows;
-
-        // Create the row div
-        generateRow(rows);
-
-        // Each column will be appended to the corresponding row div
-
-        // Create hour column
-        generateHourColumn(currentHour);
-        // Create text area
-        generateTextAreaColumn(rows);
-        // Create save button
-        generateSaveButton(rows);
-
-    };
-
-    // Save the user data
+// Save the user data
 
 // ----------------------------------------------------------------------------------
 
