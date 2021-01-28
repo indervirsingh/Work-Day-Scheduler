@@ -23,8 +23,34 @@ var currentDayText = document.getElementById("currentDay");
         rowDiv.attr("id", rowNumber.toString());
         rowDiv.addClass(rowNumber.toString());
 
+        checkCalendarTimes(rowDiv, rowNumber);
         // Add that row to the container, so it shows up on the html
         containerDiv.append(rowDiv);
+    };
+
+    var checkCalendarTimes = function (rowDiv, rowNumber) {
+
+        // Get the current hour
+        var currentHour = moment().hour();
+
+        // This will be the hourRow to compare to, but only the digits, EX: 9AM -> 9
+        var hourRow = parseInt(hours[rowNumber].replace(/\D/g, ""));
+
+        // Converts to military time
+        if (hourRow < 9) {
+            hourRow += 12;
+        };
+
+        // This will make the past hours gray/red/green depending on time
+        if (currentHour > hourRow) {
+            rowDiv.addClass("past");
+        }
+        else if (currentHour == hourRow) {
+            rowDiv.addClass("present");
+        }
+        else {
+            rowDiv.addClass("future");
+        };
     };
 
     var generateHourColumn = function (rowNumber) {
@@ -81,10 +107,9 @@ var currentDayText = document.getElementById("currentDay");
     };
 
     var generateCurrentDay = function () {
-        
+
         // Use moment.js to get the current day
         var currentDay = moment().format("dddd, MMMM Do");
-        console.log(currentDay);
         currentDayText.innerHTML = currentDay;
     };
 
@@ -112,6 +137,8 @@ var currentDayText = document.getElementById("currentDay");
         generateSaveButton(rows);
 
     };
+
+    // Save the user data
 
 // ----------------------------------------------------------------------------------
 

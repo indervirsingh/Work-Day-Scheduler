@@ -25,21 +25,18 @@ textarea {
     white-space: pre-wrap;
 }
 
-.time-block {
-    text-align: center;
-    border-radius: 15px;
-}
-
 .rows {
+    display: flex;
     white-space: pre-wrap;
     height: 80px;
     border-top: 1px solid black;
 }
-
 .hour {
     background-color: #ffffff;
     color: #000000;
     border-top: 1px dashed #000000;
+    text-align: center;
+    border-radius: 15px;
 }
 
 .past {
@@ -55,7 +52,7 @@ textarea {
 .future {
     background-color: #77dd77;
     color: white;
-  }
+}
 
 .saveButton {
     border-left: 1px solid black;
