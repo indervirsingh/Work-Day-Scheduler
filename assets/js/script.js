@@ -1,5 +1,5 @@
 var containerDiv = $(".container");
-var currentDayText = $("#currentDay");
+var currentDayText = document.getElementById("currentDay");
 
 /* VARIABLES */
 
@@ -80,10 +80,20 @@ var currentDayText = $("#currentDay");
         row.append(saveButton);
     };
 
+    var generateCurrentDay = function () {
+        
+        // Use moment.js to get the current day
+        var currentDay = moment().format("dddd, MMMM Do");
+        console.log(currentDay);
+        currentDayText.innerHTML = currentDay;
+    };
+
 // ----------------------------------------------------------------------------------
 
 /* ALL OTHER CODE */
 
+    // Generate the day on the header
+    generateCurrentDay();
     // This loop will generate the rows (hours)
     for (let rows = 0; rows < maxRows; rows++) {
 
