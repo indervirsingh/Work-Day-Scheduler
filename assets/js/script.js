@@ -15,6 +15,28 @@ var currentDayText = document.getElementById("currentDay");
 
 /* FUNCTIONS */
 
+    var generateCalendar = function () {
+
+        // This loop will generate the rows (hours)
+
+        for (let rows = 0; rows < maxRows; rows++) {
+
+            let currentHour = rows;
+
+            // Create the row div
+            generateRow(rows);
+
+            // Each column will be appended to the corresponding row div
+
+            // Create hour column
+            generateHourColumn(currentHour);
+            // Create text area
+            generateTextAreaColumn(rows);
+            // Create save button
+            generateSaveButton(rows);
+        };
+    };
+
     var generateRow = function (rowNumber) {
 
         // Create div, add the classes "rows" and row number as an ID
@@ -153,28 +175,12 @@ var currentDayText = document.getElementById("currentDay");
 
 /* ALL OTHER CODE */
 
-// Generate the day on the header
-generateCurrentDay();
-// This loop will generate the rows (hours)
-for (let rows = 0; rows < maxRows; rows++) {
-    
-    let currentHour = rows;
-    
-    // Create the row div
-    generateRow(rows);
-    
-    // Each column will be appended to the corresponding row div
-    
-    // Create hour column
-    generateHourColumn(currentHour);
-    // Create text area
-    generateTextAreaColumn(rows);
-    // Create save button
-    generateSaveButton(rows);
-    
-};
-// Load saved data, AFTER loading the rows
-renderStoredData();
+    // Load the day on the header
+    generateCurrentDay();
+    // Load the calendar
+    generateCalendar();
+    // Load saved data, AFTER loading the calendar
+    renderStoredData();
 
 // ----------------------------------------------------------------------------------
 
