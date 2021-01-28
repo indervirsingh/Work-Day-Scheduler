@@ -1,5 +1,9 @@
-var containerDiv = $(".container");
-var currentDayText = document.getElementById("currentDay");
+/* HARD-CODED ELEMENTS */
+
+    var containerDiv = $(".container");
+    var currentDayText = document.getElementById("currentDay");
+
+// ----------------------------------------------------------------------------------
 
 /* VARIABLES */
 
